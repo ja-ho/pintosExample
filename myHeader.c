@@ -21,9 +21,13 @@ int tokenizer(char* str, char token[][MAX_TOKEN_SIZE])
 }
 
 //handle the command taken by token[][], and process it.
-int commandHandler(char token[][MAX_STR_SIZE], int tokenCount)
-{
-	
+int commandHandler(char token[][MAX_STR_SIZE], int tokenCount, struct list *table_list, struct list *table_hash, 
+																						struct list *table_bitmap)
+{		
+	struct list_table *lists;
+	struct hash_table *hashs;
+	struct bitmap_table *bitmaps;
+	struct list_elem *temp;
 
 	if(strcmp(token[0], "quit" == 0)) {
 		return -1;
@@ -31,7 +35,9 @@ int commandHandler(char token[][MAX_STR_SIZE], int tokenCount)
 	
 	if(strcmp(token[0], "create" ==0)) {
 		if(strcmp(token[1], "list" == 0)) {
-			
+			bool isExist = false;
+				
+		
 		} else if(strcmp(token[1], "hashtable" == 0)) {
 		
 		} else if(strcmp(token[1], "bitmap" == 0)) {
@@ -76,6 +82,11 @@ int commandHandler(char token[][MAX_STR_SIZE], int tokenCount)
 	
 	} else if (strcmp(token[0], "list_min" == 0)) {
 	
+	//my function
+	} else if (strcmp(token[0], "list_swap" == 0)) {
+	
+	} else if (strcmp(token[0], "list_shuffle" == 0)) {
+	
 	//hashtable function
 	} else if (strcmp(token[0], "hash_insert" == 0)) {
 	
@@ -92,6 +103,9 @@ int commandHandler(char token[][MAX_STR_SIZE], int tokenCount)
 	} else if (strcmp(token[0], "hash_empty" == 0)) {
 	
 	} else if (strcmp(token[0], "hash_apply" == 0)) {
+	
+	//my function
+	} else if (strcmp(token[0], "hash_int_2" == 0)) {
 	
 	//bitmap function
 	} else if (strcmp(token[0], "bitmap_size" == 0)) {
@@ -125,92 +139,17 @@ int commandHandler(char token[][MAX_STR_SIZE], int tokenCount)
 	} else if (strcmp(token[0], "bitmap_scan_and_flip" == 0)) {
 	
 	} else if (strcmp(token[0], "bitmap_dump" == 0)) {
+
+	//my function
+	} else if (strcmp(token[0], "bitmap_expand" == 0)) {
 	
 	}
 	
 	
 	
 	
-	
-	
-	
-
-
-
+	return 0;
 }
 
 
-/*List*/
-//swap two elements of list which is taken by parameter.
-void list_swap(struct list_elem *a, struct list_elem *b)
-{
-	struct list_elem* temp = NULL;
-	
-	if(a->next != NULL) {
-		a->next->prev = b;
-	}
 
-	if(a->prev != NULL) {
-		a->prev->next = b;
-	}
-	
-	if(b->next != NULL) {
-		b->next->prev = a;
-	}
-
-	if(b->prev != NULL) {
-		b->prev->next = a;
-	}
-
-	temp->next = a->next;
-	temp->prev = a->prev;
-
-	a->next = b->next;
-	a->prev = b->prev;
-
-	b->next = temp->next;
-	b->prev = temp->prev;
-
-}
-
-//shuffle the list randomly.
-void list_shuffle(struct list* list)
-{
-	int i, j;
-	int random_1, random_2;
-	struct list_elem *first, *second;
-	int listSize= list_size(list);
-	for(i=0; i< listSize; i++) {
-		random_1 = rand % listSize;
-		random_2 = rand % listSize;
-		if(random_1 == random_2) continue;
-
-		first = list_begin(list);
-		second = list_begin(list);
-		for(j=0; j<random_1; j++) {
-			first = list_next(first);
-		}
-		
-		for(j=0; j<random_2; j++) {
-			second = list_next(second);
-		}
-		list_swap(first, second);
-	}
-}
-
-/*Hashtable*/
-
-//return hash value of integer i
-unsigned hash_int_2(int i)
-{
-	
-}
-
-
-/*Bitmap*/
-
-//expand Bitmap's size
-struct Bitmap *bitmap_expand(struct bitmap *bitmap, int size)
-{
-	
-}
