@@ -572,8 +572,8 @@ void list_shuffle(struct list* list)
 	struct list_elem *first, *second;
 	int listSize= list_size(list);
 	for(i=0; i< listSize; i++) {
-		random_1 = rand % listSize;
-		random_2 = rand % listSize;
+		random_1 = rand()%listSize;
+		random_2 = rand()%listSize;
 		if(random_1 == random_2) continue;
 
 		first = list_begin(list);
